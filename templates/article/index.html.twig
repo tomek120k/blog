@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>Article index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Body</th>
+                <th>File</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles.results %}
+            <tr>
+                <td>{{ article.title }}</td>
+                <td>{{ article.body }}</td>
+                <td>
+                    {% if article.file %}
+                    <img style="width: 100px" src="{{ asset('uploads/article_imgs/' ~ article.file) }}" alt="">
+                    {% endif %}
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
+                    <br/>
+                    <a class="btn btn-success" href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+
+            <li class="page-item {% if not articles.prevPage %}disabled{% endif %}"><a class="page-link" href="{{ path('app_article_index', {page: articles.prevPage}) }}">Previous</a></li>
+            <li class="page-item active"><a class="page-link" href="#">{{ articles.currentPage }}</a></li>
+            <li class="page-item {% if not articles.nextPage %}disabled{% endif %}"><a class="page-link" href="{{ path('app_article_index', {page: articles.nextPage}) }}">Next</a></li>
+        </ul>
+    </nav>
+
+    <a class="btn btn-success" href="{{ path('app_article_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,314 @@
+swagger: "2.0"
+info:
+  title: Blog API
+  description: Blog API DESC
+  version: 1.0.0
+host: https://127.0.0.1:8000/
+basePath: /api/
+schemes:
+  - https
+paths:
+  /articles:
+    post:
+      summary: Create new article
+      consumes:
+        - application/json
+      responses:
+        202:
+          description: Return 202 code when HTTP request accepted
+        400:
+          description: Invalid json or invalid data
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                default: 400
+              type:
+                type: string
+                default: invalid_body_format
+              title:
+                type: string
+                default: Invalid JSON format sent
+      parameters:
+        - in: body
+          name: article
+          description: The article to create.
+          schema:
+            type: object
+            required:
+              - title
+              - body
+            properties:
+              title:
+                type: string
+                default: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              body:
+                type: string
+                default: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    get:
+      summary: Returns a list of articles.
+      description: List of articles.
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          in: query
+          required: false
+          type: number
+          default: 1
+        - name: limit
+          in: query
+          required: false
+          type: number
+          default: 10
+      responses:
+        400:
+          description: Article list error
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                default: 400
+              type:
+                type: string
+                default: not_found
+              title:
+                type: string
+                default: Resource not found
+        200:
+          description: Article list
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                description: "Articles count"
+              pages:
+                type: number
+                description: "Pages"
+              _links:
+                type: object
+                properties:
+                  self:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                  prev:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                  next:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                  first:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+
+              _embedded:
+                type: object
+                properties:
+                  articles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        title:
+                          type: string
+                        body:
+                          type: string
+                        file:
+                          type: string
+                        _links:
+                          type: object
+                          properties:
+                            self:
+                              type: object
+                              properties:
+                                href:
+                                  type: string
+  /articles/{uuid}:
+    delete:
+      summary: delete article
+      consumes:
+        - application/json
+      responses:
+        204:
+          description: Return 204 code when HTTP request accepted
+        400:
+          description: Invalid json or invalid data
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                default: 400
+              type:
+                type: string
+                default: invalid_body_format
+              title:
+                type: string
+                default: Invalid JSON format sent
+      parameters:
+        - name: uuid
+          in: path
+          required: false
+          type: string
+          default: ''
+    put:
+      summary: Update article
+      consumes:
+        - application/json
+      responses:
+        202:
+          description: Return 202 code when HTTP request accepted
+        400:
+          description: Invalid json or invalid data
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                default: 400
+              type:
+                type: string
+                default: invalid_body_format
+              title:
+                type: string
+                default: Invalid JSON format sent
+      parameters:
+        - name: uuid
+          in: path
+          required: false
+          type: string
+          default: ''
+        - in: body
+          name: article
+          description: The article to create.
+          schema:
+            type: object
+            required:
+              - title
+              - body
+            properties:
+              title:
+                type: string
+                default: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              body:
+                type: string
+                default: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    get:
+      summary: Returns a article
+      description: List of articles.
+      produces:
+        - application/json
+      parameters:
+        - name: uuid
+          in: path
+          required: false
+          type: string
+          default: ''
+      responses:
+        400:
+          description: Article not found
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                default: 400
+              type:
+                type: string
+                default: not_found
+              title:
+                type: string
+                default: Resource not found
+        200:
+          description: Article list
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              title:
+                type: string
+              body:
+                type: string
+              file:
+                type: string
+              _links:
+                type: object
+                properties:
+                  self:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+
+  /articles/{uuid}/file:
+    delete:
+      summary: delete article file
+      responses:
+        204:
+          description: Return 202 code when HTTP request accepted
+        400:
+          description: Invalid json or invalid data
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                default: 400
+              type:
+                type: string
+                default: invalid_body_format
+              title:
+                type: string
+                default: Invalid JSON format sent
+      parameters:
+        - name: uuid
+          in: path
+          required: false
+          type: string
+          default: ''
+    put:
+      summary: Update article file
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: uuid
+          in: path
+          required: false
+          type: string
+          default: ''
+        - default: ''
+          type: string
+          in: body
+          name: base64
+          description: base64 encoded file
+      responses:
+        202:
+          description: Return 202 code when HTTP request accepted
+        400:
+          description: Invalid json or invalid data
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                default: 400
+              type:
+                type: string
+                default: invalid_body_format
+              title:
+                type: string
+                default: Invalid JSON format sent

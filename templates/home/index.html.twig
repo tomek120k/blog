@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+
+    <div class="card-group">
+        <div class="card text-center">
+            <div class="card-body ">
+                <h5 class="card-title">Swagger</h5>
+                <p class="card-text">Swagger BLOG API DOC.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">
+                    <a href="{{ path('app_swagger') }}" class="btn btn-primary">GO</a>
+                </small>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">API</h5>
+                <p class="card-text">Blog API.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">
+                    <a href="{{ path('article_index') }}" class="btn btn-primary">GO</a>
+                </small>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Blog</h5>
+                <p class="card-text">Article list.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">
+                    <a href="{{ path('app_article_index') }}" class="btn btn-primary">GO</a>
+                </small>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

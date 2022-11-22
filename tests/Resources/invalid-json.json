@@ -1,0 +1,5 @@
+{
+  "status": 400,
+  "type": "invalid_body_format",
+  "title": "Invalid JSON format sent"
+}

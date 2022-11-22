@@ -1,0 +1,33 @@
+{
+  "count": "@number@",
+  "pages": "@number@",
+  "_links": {
+    "self": {
+      "href": "@string@"
+    },
+    "prev": {
+      "href": "@string@  || @null@"
+    },
+    "next": {
+      "href": "@string@ || @null@"
+    },
+    "first": {
+      "href": "@string@"
+    }
+  },
+  "_embedded": {
+    "articles": [
+    {
+      "id":  "@string@",
+      "title": "@string@",
+      "body":  "@string@",
+      "file": "@string@",
+      "_links": {
+        "self": {
+          "href": "@string@"
+        }
+      }
+    },
+    "@...@"
+  ]}
+}

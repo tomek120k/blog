@@ -1,0 +1,6 @@
+{
+  "status": 400,
+  "type": "validation_error",
+  "title": "There was a validation error",
+  "errors": "@array@"
+}
