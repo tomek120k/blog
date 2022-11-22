@@ -1,6 +1,9 @@
 #### Install & Start:
 docker-compose up -d; <br/>
 
+docker-compose exec php /bin/bash -c "composer install";<br/>
+docker-compose exec php /bin/bash -c "npm install";<br/>
+
 docker-compose exec php /bin/bash -c "php bin/console doctrine:database:create";<br/>
 docker-compose exec php /bin/bash -c "php bin/console doctrine:schema:create";<br/>
 docker-compose exec php /bin/bash -c "php bin/console doctrine:fixtures:load"; <br/>
