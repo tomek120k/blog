@@ -21,5 +21,10 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "dev-server": "^0.2.0",
+        "npm": "^9.1.2",
+        "run": "^1.4.0"
     }
 }
