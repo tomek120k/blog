@@ -162,7 +162,10 @@ class ApiController extends AbstractController
             $filePath = $this->getParameter('img_dir').'/'.$file;
             $data = explode(',', $requestData);
             $fileData = base64_decode($data[1]);
-            if ((strlen($fileData) / 1024 / 1024) > 8) {
+            /**
+             * @todo checking the file size is in two places :(
+             */
+            if ((strlen($fileData) / 1024 / 1024) > 1) {
                 return $this->handleInvalidFileResponse();
             }
 

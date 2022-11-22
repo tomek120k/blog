@@ -42,7 +42,7 @@ class ArticleType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '8m',
+                        'maxSize' => '1m',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
