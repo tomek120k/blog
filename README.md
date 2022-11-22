@@ -23,3 +23,6 @@ docker-compose exec php /bin/bash -c "composer test";<br/>
 
 ### CS FIX
 docker-compose exec php /bin/bash -c "composer cs-fix";<br/>
+
+### DEV URL
+http://localhost:8888/
