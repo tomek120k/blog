@@ -8,7 +8,7 @@ RUN chmod +x /var/www/html
 RUN chmod +x /usr/bin/docker-wait-for-it.sh
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends libssl-dev zlib1g-dev curl wget git unzip netcat libxml2-dev libpq-dev libzip-dev npm && \
+    apt-get install -y --no-install-recommends  libssl-dev zlib1g-dev curl wget git unzip netcat libxml2-dev libpq-dev libzip-dev && \
     pecl install apcu && \
     docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
     docker-php-ext-install -j$(nproc) zip opcache intl pdo_pgsql pgsql && \
@@ -19,6 +19,7 @@ RUN apt-get update \
         && apt-get install -y \
             librabbitmq-dev \
             libssh-dev \
+            npm \
         && docker-php-ext-install \
             bcmath \
             sockets \

@@ -1,6 +1,13 @@
 version: "3.4"
 
 services:
+  node:
+    image: "node:16"
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: "npm install && npm run dev"
   # web
   web:
     image: nginx:latest
@@ -13,7 +20,6 @@ services:
       - "8888:80"
     networks:
       - app_network
-
   # php
   php:
     build:
