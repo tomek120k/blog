@@ -11,6 +11,7 @@ use App\Blog\CQRS\UpdateArticleFileCommand;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Shared\CQRS\CommandBus;
+use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -22,6 +23,10 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 #[Route('/articles')]
 class ArticleController extends AbstractController
 {
+    public function __construct(private readonly LoggerInterface $logger)
+    {
+    }
+
     #[Route('/', name: 'app_article_index', methods: ['GET'])]
     public function index(Request $request, ArticlesQueryHandler $articlesQueryHandler): Response
     {
@@ -125,7 +130,7 @@ class ArticleController extends AbstractController
                 $newFilename
             );
         } catch (FileException $e) {
-            // @todo logowanie błędu
+            $this->logger->warning($e->getMessage());
         }
 
         return $newFilename;

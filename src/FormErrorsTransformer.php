@@ -2,11 +2,11 @@
 
 namespace App;
 
-use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormInterface;
 
 class FormErrorsTransformer
 {
-    public function getErrorMessages(Form $form): array
+    public function getErrorMessages(FormInterface $form): array
     {
         $errors = [];
         foreach ($form->getErrors() as $key => $error) {

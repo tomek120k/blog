@@ -18,7 +18,7 @@ use App\View\ArticleApiView;
 use App\View\ArticlesApiView;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -162,6 +162,10 @@ class ApiController extends AbstractController
             $filePath = $this->getParameter('img_dir').'/'.$file;
             $data = explode(',', $requestData);
             $fileData = base64_decode($data[1]);
+            if ((strlen($fileData) / 1024 / 1024) > 8) {
+                return $this->handleInvalidFileResponse();
+            }
+
             file_put_contents($filePath, $fileData);
             $commandBus->dispatch(new UpdateArticleFileCommand(
                 $article->getId(),
@@ -195,7 +199,7 @@ class ApiController extends AbstractController
         return $response;
     }
 
-    private function getErrorMessages(Form $form): array
+    private function getErrorMessages(FormInterface $form): array
     {
         return $this->formErrorsTransformer->getErrorMessages($form);
     }
