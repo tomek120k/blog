@@ -104,8 +104,8 @@
             "@tests:static:cs"
         ],
         "tests:static:psalm": [
-            "vendor/bin/psalm --threads=2 --diff",
-            "vendor/bin/psalm --threads=2 --diff --taint-analysis"
+            "vendor/bin/psalm --diff",
+            "vendor/bin/psalm --diff --taint-analysis"
         ],
         "tests:static:phpstan": [
             "vendor/bin/phpstan analyse src"

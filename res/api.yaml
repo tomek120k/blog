@@ -3,10 +3,7 @@ info:
   title: Blog API
   description: Blog API DESC
   version: 1.0.0
-host: https://127.0.0.1:8000/
 basePath: /api/
-schemes:
-  - https
 paths:
   /articles:
     post:
